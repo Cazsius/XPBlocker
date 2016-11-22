@@ -19,11 +19,12 @@ public class EventManager {
 		}
 	}
 	
+	
 	@SubscribeEvent
 	public void onPlayerUseBlock(PlayerInteractEvent.RightClickBlock event){
 		if (event.getItemStack() != null){
 			if (event.getItemStack().getItem() == Items.EXPERIENCE_BOTTLE){
-				event.getItemStack().stackSize --;
+				event.getItemStack().func_190918_g(1);
 				int xp = 5;
 				for (int i = 0; i < xp; i ++){
 					if (!event.getWorld().isRemote){
@@ -72,7 +73,7 @@ public class EventManager {
 	@SubscribeEvent
 	public void onSmelt(ItemSmeltedEvent event){
 		if (isOre(event.smelting)){
-			int xp = (int) (event.smelting.getItem().getSmeltingExperience(event.smelting)*event.smelting.stackSize);
+			int xp = (int) (event.smelting.getItem().getSmeltingExperience(event.smelting)*event.smelting.getMaxStackSize());
 			event.player.addExperience(xp);
 		}
 	}
