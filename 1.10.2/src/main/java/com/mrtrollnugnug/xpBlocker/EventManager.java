@@ -11,23 +11,24 @@ import net.minecraftforge.fml.common.gameevent.PlayerEvent.ItemSmeltedEvent;
 
 public class EventManager {
 	@SubscribeEvent
-	public void onEntityJoinWorld(EntityJoinWorldEvent event){
-		if (event.getEntity() instanceof EntityXPOrb){
-			if (!event.getEntity().getEntityData().hasKey("XPBLOCKER_protected")){
+	public void onEntityJoinWorld(EntityJoinWorldEvent event) {
+		if (event.getEntity() instanceof EntityXPOrb) {
+			if (!event.getEntity().getEntityData().hasKey("XPBLOCKER_protected")) {
 				event.setCanceled(true);
 			}
 		}
 	}
-	
+
 	@SubscribeEvent
-	public void onPlayerUseBlock(PlayerInteractEvent.RightClickBlock event){
-		if (event.getItemStack() != null){
-			if (event.getItemStack().getItem() == Items.EXPERIENCE_BOTTLE){
-				event.getItemStack().stackSize --;
+	public void onPlayerUseBlock(PlayerInteractEvent.RightClickBlock event) {
+		if (event.getItemStack() != null) {
+			if (event.getItemStack().getItem() == Items.EXPERIENCE_BOTTLE) {
+				event.getItemStack().stackSize--;
 				int xp = 5;
-				for (int i = 0; i < xp; i ++){
-					if (!event.getWorld().isRemote){
-						EntityXPOrb orb = new EntityXPOrb(event.getWorld(), event.getPos().getX()+0.5, event.getPos().getY()+0.5, event.getPos().getZ()+0.5, 2);
+				for (int i = 0; i < xp; i++) {
+					if (!event.getWorld().isRemote) {
+						EntityXPOrb orb = new EntityXPOrb(event.getWorld(), event.getPos().getX() + 0.5,
+								event.getPos().getY() + 0.5, event.getPos().getZ() + 0.5, 2);
 						orb.getEntityData().setBoolean("XPBLOCKER_protected", true);
 						event.getWorld().spawnEntityInWorld(orb);
 					}
@@ -36,15 +37,16 @@ public class EventManager {
 			}
 		}
 	}
-	
+
 	@SubscribeEvent
-	public void onPlayerUse(PlayerInteractEvent.RightClickItem event){
-		if (event.getItemStack() != null){
-			if (event.getItemStack().getItem() == Items.EXPERIENCE_BOTTLE){
+	public void onPlayerUse(PlayerInteractEvent.RightClickItem event) {
+		if (event.getItemStack() != null) {
+			if (event.getItemStack().getItem() == Items.EXPERIENCE_BOTTLE) {
 				int xp = 5;
-				for (int i = 0; i < xp; i ++){
-					if (!event.getWorld().isRemote){
-						EntityXPOrb orb = new EntityXPOrb(event.getWorld(), event.getPos().getX()+0.5, event.getPos().getY()+0.5, event.getPos().getZ()+0.5, 2);
+				for (int i = 0; i < xp; i++) {
+					if (!event.getWorld().isRemote) {
+						EntityXPOrb orb = new EntityXPOrb(event.getWorld(), event.getPos().getX() + 0.5,
+								event.getPos().getY() + 0.5, event.getPos().getZ() + 0.5, 2);
 						orb.getEntityData().setBoolean("XPBLOCKER_protected", true);
 						event.getWorld().spawnEntityInWorld(orb);
 					}
@@ -53,14 +55,15 @@ public class EventManager {
 			}
 		}
 	}
-	
+
 	@SubscribeEvent
-	public void onBlockBreak(BreakEvent event){
-		if (event.getExpToDrop() > 0){
+	public void onBlockBreak(BreakEvent event) {
+		if (event.getExpToDrop() > 0) {
 			int xp = event.getExpToDrop();
-			for (int i = 0; i < xp; i ++){
-				if (!event.getWorld().isRemote){
-					EntityXPOrb orb = new EntityXPOrb(event.getWorld(), event.getPos().getX()+0.5, event.getPos().getY()+0.5, event.getPos().getZ()+0.5, 2);
+			for (int i = 0; i < xp; i++) {
+				if (!event.getWorld().isRemote) {
+					EntityXPOrb orb = new EntityXPOrb(event.getWorld(), event.getPos().getX() + 0.5,
+							event.getPos().getY() + 0.5, event.getPos().getZ() + 0.5, 2);
 					orb.getEntityData().setBoolean("XPBLOCKER_protected", true);
 					event.getWorld().spawnEntityInWorld(orb);
 				}
@@ -68,17 +71,20 @@ public class EventManager {
 			event.setExpToDrop(0);
 		}
 	}
-	
+
 	@SubscribeEvent
-	public void onSmelt(ItemSmeltedEvent event){
-		if (isOre(event.smelting)){
-			int xp = (int) (event.smelting.getItem().getSmeltingExperience(event.smelting)*event.smelting.stackSize);
+	public void onSmelt(ItemSmeltedEvent event) {
+		 if (!ConfigManager.SmeltXP){
+		if (isOre(event.smelting)) {
+			int xp = (int) (event.smelting.getItem().getSmeltingExperience(event.smelting) * event.smelting.stackSize);
 			event.player.addExperience(xp);
 		}
 	}
+}
+
 	
-	public boolean isOre(ItemStack stack){
-		if (Main.containsMatch(true, Main.oreItems, stack)){
+	public boolean isOre(ItemStack stack) {
+		if (XPBlocker.containsMatch(true, XPBlocker.oreItems, stack)) {
 			return true;
 		}
 		return false;

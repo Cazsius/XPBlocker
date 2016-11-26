@@ -15,8 +15,8 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.registry.GameData;
 import net.minecraftforge.oredict.OreDictionary;
 
-@Mod(modid = Main.MODID, version = Main.VERSION, name = Main.MODNAME)
-public class Main
+@Mod(modid = XPBlocker.MODID, version = XPBlocker.VERSION, name = XPBlocker.MODNAME)
+public class XPBlocker
 {
     public static final String MODID = "xpblocker";
     public static final String VERSION = "1.3";
@@ -27,6 +27,8 @@ public class Main
     @EventHandler
     public static void preInit(FMLPreInitializationEvent event){
     	MinecraftForge.EVENT_BUS.register(new EventManager());
+    	MinecraftForge.EVENT_BUS.register(new ConfigManager());
+    	ConfigManager.init(event.getSuggestedConfigurationFile());
     }
     
     @EventHandler

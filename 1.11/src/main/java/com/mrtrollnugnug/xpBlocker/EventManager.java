@@ -79,7 +79,7 @@ public class EventManager {
 	}
 	
 	public boolean isOre(ItemStack stack){
-		if (Main.containsMatch(true, Main.oreItems, stack)){
+		if (XPBlocker.containsMatch(true, XPBlocker.oreItems, stack)){
 			return true;
 		}
 		return false;
