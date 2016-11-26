@@ -7,6 +7,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 public class ConfigManager {
 	public static Configuration config;
+	public static boolean BreakBlockXP = true;
 	public static boolean SmeltXP = true;
 
 	public static void init(File configFile) {
@@ -18,7 +19,8 @@ public class ConfigManager {
 	}
 
 	public static void load() {
-		SmeltXP = config.getBoolean("SmeltXP", Configuration.CATEGORY_GENERAL, false, "Toggles whether you get XP from smelting.");
+		BreakBlockXP = config.getBoolean("BreakBlockXP", Configuration.CATEGORY_GENERAL, false, "Toggles whether you get XP from breaking blocks, such as ores.");
+		SmeltXP = config.getBoolean("SmeltXP", Configuration.CATEGORY_GENERAL, false, "Toggles whether you get XP from smelting items in a Furnace such as ores to ingots.");
 		
 		if (config.hasChanged()) {
 			config.save();
