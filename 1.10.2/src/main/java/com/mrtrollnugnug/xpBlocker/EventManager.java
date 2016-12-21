@@ -59,7 +59,7 @@ public class EventManager {
 	@SubscribeEvent
 	
 	public void onBlockBreak(BreakEvent event) {
-		if (ConfigManager.BreakBlockXP){
+		if (ConfigManager.BreakBlockXP = false) {
 		if (event.getExpToDrop() > 0) {
 			int xp = event.getExpToDrop();
 			for (int i = 0; i < xp; i++) {
@@ -77,7 +77,7 @@ public class EventManager {
 
 	@SubscribeEvent
 	public void onSmelt(ItemSmeltedEvent event) {
-		 if (ConfigManager.SmeltXP){
+		 if (ConfigManager.SmeltXP = false) {
 		if (isOre(event.smelting)) {
 			int xp = (int) (event.smelting.getItem().getSmeltingExperience(event.smelting) * event.smelting.stackSize);
 			event.player.addExperience(xp);
