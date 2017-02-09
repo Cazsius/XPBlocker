@@ -24,13 +24,13 @@ public class EventManager {
 	public void onPlayerUseBlock(PlayerInteractEvent.RightClickBlock event){
 		if (event.getItemStack() != null){
 			if (event.getItemStack().getItem() == Items.EXPERIENCE_BOTTLE){
-				event.getItemStack().func_190918_g(1);
+				event.getItemStack().setCount(1);
 				int xp = 5;
 				for (int i = 0; i < xp; i ++){
 					if (!event.getWorld().isRemote){
 						EntityXPOrb orb = new EntityXPOrb(event.getWorld(), event.getPos().getX()+0.5, event.getPos().getY()+0.5, event.getPos().getZ()+0.5, 2);
 						orb.getEntityData().setBoolean("XPBLOCKER_protected", true);
-						event.getWorld().spawnEntityInWorld(orb);
+						event.getWorld().spawnEntity(orb);
 					}
 				}
 				event.setCanceled(true);
@@ -47,7 +47,7 @@ public class EventManager {
 					if (!event.getWorld().isRemote){
 						EntityXPOrb orb = new EntityXPOrb(event.getWorld(), event.getPos().getX()+0.5, event.getPos().getY()+0.5, event.getPos().getZ()+0.5, 2);
 						orb.getEntityData().setBoolean("XPBLOCKER_protected", true);
-						event.getWorld().spawnEntityInWorld(orb);
+						event.getWorld().spawnEntity(orb);
 					}
 				}
 				event.setCanceled(true);
@@ -63,7 +63,7 @@ public class EventManager {
 				if (!event.getWorld().isRemote){
 					EntityXPOrb orb = new EntityXPOrb(event.getWorld(), event.getPos().getX()+0.5, event.getPos().getY()+0.5, event.getPos().getZ()+0.5, 2);
 					orb.getEntityData().setBoolean("XPBLOCKER_protected", true);
-					event.getWorld().spawnEntityInWorld(orb);
+					event.getWorld().spawnEntity(orb);
 				}
 			}
 			event.setExpToDrop(0);
