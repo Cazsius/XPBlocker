@@ -1,29 +1,22 @@
-# eclipse
-bin
-*.launch
-.settings
-.metadata
-.classpath
-.project
-
-# idea
-out
+*.class
+*.iml
 *.ipr
 *.iws
-*.iml
-.idea
+*.classpath
+*.project
+*.prefs
+*.launch
+/output
 
-# gradle
-build
-.gradle
+#ForgeGradle
+/build
+/.gradle
+/eclipse/assets
+/libs
+/bin/
+/run/
+/out/
+gradle.properties
 
-# other
-eclipse
-run
-
-# mac
-.DS_Store
-*.hprof
-*.gradle
-1.9.4/setup.bat
-1.10.2/build.bat
+\.idea/
+build.bat

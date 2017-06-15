@@ -19,9 +19,8 @@ import net.minecraftforge.oredict.OreDictionary;
 public class XPBlocker
 {
     public static final String MODID = "xpblocker";
-    public static final String VERSION = "1.3";
+    public static final String VERSION = "1.2.0";
     public static final String MODNAME = "XP Blocker";
-    public static boolean SmeltXP = true;
     
     static ArrayList<ItemStack> oreItems = new ArrayList<ItemStack>();
     
@@ -32,9 +31,10 @@ public class XPBlocker
     	ConfigManager.init(event.getSuggestedConfigurationFile());
     }
     
-    @EventHandler
+    @SuppressWarnings("deprecation")
+	@EventHandler
     public static void postInit(FMLPostInitializationEvent event){
-    	for (int i = 0; i < GameData.getItemRegistry().getKeys().size(); i ++){
+    	for (int i = 0; i < GameData.getItemRegistry().getKeys().size(); i ++) {
     		ItemStack stack = new ItemStack((Item)GameData.getItemRegistry().getObject((ResourceLocation) GameData.getItemRegistry().getKeys().toArray()[i]));
     		int[] ids = OreDictionary.getOreIDs(stack);
     		System.out.println("ids"+ids);
